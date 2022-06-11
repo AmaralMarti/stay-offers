@@ -1,0 +1,30 @@
+version: "3"
+services:
+    application:
+        build: 
+            context: .
+            dockerfile: ./docker/Dockerfile
+        container_name: tui_app
+        restart: "no"
+        environment:
+            - SERVER_PORT=3000
+            - API_KEY=PwjbaSNeU83sRA1qAamCqAQaPrr4a1GF
+            - API_SECRET=m9CGQGsbMOwuUOdr
+            - DB_HOST=tui_db
+            - DB_PORT=27017
+            - DB_USER=root
+            - DB_PASSWORD=Teste123
+        volumes:
+            - ".:/project"
+        ports:
+            - 3000:3000        
+        command: bash -c "npm install ; npm start"
+
+    database:
+        image: mongo
+        container_name: tui_db
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=Teste123
+        ports:
+            - 27017:27017
