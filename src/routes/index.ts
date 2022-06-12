@@ -1,5 +1,7 @@
-import { NextFunction, Request, Response, Router } from 'express'
+import Express, { NextFunction, Request, Response, Router } from 'express'
 import { RouterV1 } from './v1'
+import swaggerUi from 'swagger-ui-express'
+import documentation from '../swagger.json'
 
 const defaultMessage = (request: Request, response: Response) => {
     response.send(`
@@ -16,16 +18,17 @@ const defaultMessage = (request: Request, response: Response) => {
 
 const errorHandler = (error: any, request: Request, response: Response, next: NextFunction) => {
     console.log('Error', error)
-    response.json({ 
+    response.status(400).json({
        error: error.message
-    })    
+    })
 }
 
 const router = Router()
 
-router.get('/', defaultMessage)
+router.use(Express.json())
 router.use(errorHandler)
-
+router.get('/', defaultMessage)
 router.use('/v1', RouterV1)
+router.use('/documentation', swaggerUi.serve, swaggerUi.setup(documentation))
 
 export { router as Router  }

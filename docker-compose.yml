@@ -1,7 +1,7 @@
 version: "3"
 services:
     application:
-        build: 
+        build:
             context: .
             dockerfile: ./docker/Dockerfile
         container_name: tui_app
@@ -27,7 +27,8 @@ services:
         volumes:
             - ".:/project"
         ports:
-            - 3000:3000        
+            - 3000:3000
+            - 3001:3001
         command: bash -c "npm install ; npm start"
 
     database:

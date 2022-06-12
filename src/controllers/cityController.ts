@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express'
 import { City } from '../models/city'
 import { BaseController } from './baseController'
 
-
 class CityController extends BaseController {
     public static async getAll(request: Request, response: Response): Promise<void> {
         const cities = await City.find({})

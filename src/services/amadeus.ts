@@ -88,7 +88,6 @@ class Amadeus {
 
         for (const item of data.data) {
             const city: ICity = {
-                id: item.id,
                 cityCode: item.iataCode,
                 name: item.name,
                 countryName: item.address.countryName,

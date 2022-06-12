@@ -22,7 +22,7 @@ class HotelController extends BaseController {
         if (hotel) {
             const cityCode = await HotelController.getCityCode(request)
 
-            if (hotel.cityCode != cityCode) {
+            if (cityCode && hotel.cityCode != cityCode) {
                 response.status(400).json({
                     status: 400,
                     message: "Hotel dont't belongs to City",

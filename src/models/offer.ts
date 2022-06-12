@@ -46,6 +46,13 @@ const OfferSchema = new Schema({
     },
 })
 
+OfferSchema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+
+    return object
+})
+
 interface OfferDoc extends Document {
     offerId: string
     hotelId: string

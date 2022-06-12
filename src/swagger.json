@@ -1,0 +1,621 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "StayOffers",
+      "description": "A small demonstration of an API concept with Node JS and Typescript.",
+      "version": "1.0.0"
+    },
+    "basePath": "/v1",
+    "tags": [
+      {
+        "name": "City",
+        "description": "City query endpoints"
+      },
+      {
+        "name": "Hotel",
+        "description": "Hotel query endpoints"
+      },
+      {
+        "name": "Offer",
+        "description": "Offer query endpoints"
+      },
+      {
+        "name": "Synchronization",
+        "description": "Populate local database with City, Hotel and Offer data from Amadeus API"
+      }
+    ],
+    "paths": {
+      "/cities": {
+        "get": {
+          "tags": [
+            "City"
+          ],
+          "summary": "Get all cities",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/City"
+                }
+              }
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/cities/{cityId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "cityId",
+              "in": "path",
+              "description": "ID of city to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "City"
+          ],
+          "summary": "Get specific city",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/City"
+              }
+            },
+            "400": {
+              "description": "Invalid City ID"
+            },
+            "404": {
+              "description": "City not found"
+            }
+          }
+        }
+      },
+      "/cities/{cityId}/hotels": {
+        "get": {
+          "parameters": [
+            {
+              "name": "cityId",
+              "in": "path",
+              "description": "ID of city to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "City"
+          ],
+          "summary": "Returns the list of Hotels for a specific City",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Hotel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid City ID"
+            },
+            "404": {
+              "description": "City not found"
+            }
+          }
+        }
+      },
+      "/cities/{cityId}/hotels/{hotelId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "cityId",
+              "in": "path",
+              "description": "ID of city to return",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "City"
+          ],
+          "summary": "Returns a specific Hotel for a specific City",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Hotel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid City ID | Invalid Hotel ID | Hotel dont't belongs to City"
+            },
+            "404": {
+              "description": "City not found | Hotel not found"
+            }
+          }
+        }
+      },
+      "/cities/{cityId}/hotels/{hotelId}/offers": {
+        "get": {
+          "parameters": [
+            {
+              "name": "cityId",
+              "in": "path",
+              "description": "ID of city to return",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "City"
+          ],
+          "summary": "Returns the list of Offers, for a specific Hotel, for a specific City",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Offer"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid City ID | Invalid Hotel ID | Hotel dont't belongs to City"
+            },
+            "404": {
+              "description": "City not found | Hotel not found"
+            }
+          }
+        }
+      },
+      "/cities/{cityId}/hotels/{hotelId}/offers/{offerId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "cityId",
+              "in": "path",
+              "description": "ID of city to return",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "offerId",
+              "in": "path",
+              "description": "ID of offer to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "City"
+          ],
+          "summary": "Returns a specific Offer, for a specific Hotel, for a specific City",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Offer"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid City ID | Invalid Hotel ID | Invalid Offer ID | Hotel dont't belongs to City | Offer dont't belongs to Hotel"
+            },
+            "404": {
+              "description": "City not found | Hotel not found | Offer not found"
+            }
+          }
+        }
+      },
+      "/hotels": {
+        "get": {
+          "tags": [
+            "Hotel"
+          ],
+          "summary": "Get all hotels",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Hotel"
+                }
+              }
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/hotels/{hotelId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "Hotel"
+          ],
+          "summary": "Get specific hotel",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Hotel"
+              }
+            },
+            "400": {
+              "description": "Invalid Hotel ID"
+            },
+            "404": {
+              "description": "Hotel not found"
+            }
+          }
+        }
+      },
+      "/hotels/{hotelId}/offers": {
+        "get": {
+          "parameters": [
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "Hotel"
+          ],
+          "summary": "Returns the list of Offers for a specific Hotel",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Offer"
+              }
+            },
+            "400": {
+              "description": "Invalid Hotel ID"
+            },
+            "404": {
+              "description": "Hotel not found"
+            }
+          }
+        }
+      },
+      "/hotels/{hotelId}/offers/{offerId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "hotelId",
+              "in": "path",
+              "description": "ID of hotel to return",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "offerId",
+              "in": "path",
+              "description": "ID of offer to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "Hotel"
+          ],
+          "summary": "Returns a specific Offer for a specific Hotel",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Offer"
+              }
+            },
+            "400": {
+              "description": "Invalid Hotel ID | Invalid Offer ID | Offer dont't belongs to Hotel"
+            },
+            "404": {
+              "description": "Hotel not found | Offer not found"
+            }
+          }
+        }
+      },
+      "/offers": {
+        "get": {
+          "tags": [
+            "Offer"
+          ],
+          "summary": "Get all offers",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Offer"
+                }
+              }
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/offers/{offerId}": {
+        "get": {
+          "parameters": [
+            {
+              "name": "offerId",
+              "in": "path",
+              "description": "ID of offer to return",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "tags": [
+            "Offer"
+          ],
+          "summary": "Get specific offer",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Offer"
+              }
+            },
+            "400": {
+              "description": "Invalid Offer ID"
+            },
+            "404": {
+              "description": "Offer not found"
+            }
+          }
+        }
+      },
+      "/sync-data": {
+        "get": {
+          "tags": [
+            "Synchronization"
+          ],
+          "summary": "Fill data of the Cities, Hotels and Offers",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/sync-data/cities": {
+        "get": {
+          "tags": [
+            "Synchronization"
+          ],
+          "summary": "Fill data of the Cities",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/sync-data/hotels": {
+        "get": {
+          "tags": [
+            "Synchronization"
+          ],
+          "summary": "Fill data of the Hotels",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      },
+      "/sync-data/offers": {
+        "get": {
+          "tags": [
+            "Synchronization"
+          ],
+          "summary": "Fill data of the Offers",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Request error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "City": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "cityCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "Hotel": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "hotelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "cityCode": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "offerId": {
+            "type": "string"
+          },
+          "hotelId": {
+            "type": "string"
+          },
+          "checkInDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "checkOutDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "adults": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "totalPrice": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }

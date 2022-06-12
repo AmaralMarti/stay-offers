@@ -1,7 +1,6 @@
 import { Schema, model, Model, Document } from 'mongoose'
 
 interface ICity {
-    id: string
     cityCode: string
     name: string
     countryName:string
@@ -11,10 +10,6 @@ interface ICity {
 }
 
 const CitySchema = new Schema({
-    id: {
-        type: String,
-        required: true,
-    },
     cityCode: {
         type: String,
         required: true,
@@ -41,8 +36,14 @@ const CitySchema = new Schema({
     },
 })
 
+CitySchema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+
+    return object
+})
+
 interface CityDoc extends Document {
-    id: string
     cityCode: string
     name: string
     countryName:string

@@ -31,6 +31,13 @@ const HotelSchema = new Schema({
     },
 })
 
+HotelSchema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+
+    return object
+})
+
 interface HotelDoc extends Document {
     hotelId: string
     name: string

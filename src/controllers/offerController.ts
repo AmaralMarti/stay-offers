@@ -22,7 +22,7 @@ class OfferController extends BaseController {
         if (offer) {
             const hotelId = await OfferController.getHotelId(request)
 
-            if (offer.hotelId != hotelId) {
+            if (hotelId && offer.hotelId != hotelId) {
                 response.status(400).json({
                     status: 400,
                     message: "Offer dont't belongs to Hotel",
