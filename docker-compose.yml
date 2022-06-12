@@ -8,22 +8,9 @@ services:
         restart: "no"
         environment:
             - PORT=4000
-            - DB_HOST=tui_db
-            - DB_PORT=27017
-            - DB_USER=root
-            - DB_PASSWORD=Teste123
-            # Henrique
-            #- API_KEY=PwjbaSNeU83sRA1qAamCqAQaPrr4a1GF
-            #- API_SECRET=m9CGQGsbMOwuUOdr
-            # Teste 01
-            #- API_KEY=1t6PdbwM5X5MNYiXOkU0GLtm3NR8jJsE
-            #- API_SECRET=172wOFEjRZOnZQgG
-            # Teste 02
+            - DB_CONNECTION_STRING=mongodb://root:Teste123@tui_db:27017
             - API_KEY=8GGCq3GQYdN8NFx7ILxG6TLEiMvKG1rp
             - API_SECRET=UHzx0dGRhUkJqynj
-            # Teste 03
-            #- API_KEY=DfnIIzPaD2GeG7tMaJ99ZYxqGpBskpaH
-            #- API_SECRET=OUx7YvJZM8GcALBf
         volumes:
             - ".:/project"
         ports:

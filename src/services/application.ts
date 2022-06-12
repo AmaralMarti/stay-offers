@@ -4,7 +4,7 @@ import { connect as ConnectDb } from 'mongoose'
 import { Express } from 'express'
 import NewExpress from 'express'
 import { Router } from '../routes'
-import { ApplicationParameters, DatabaseParameters } from '../types/types'
+import { ApplicationParameters } from '../types/types'
 
 
 class Application {
@@ -27,10 +27,7 @@ class Application {
             PORT = 3000,
             API_KEY = '',
             API_SECRET = '',
-            DB_HOST = 'localhost',
-            DB_PORT = 27017,
-            DB_USER = 'root',
-            DB_PASSWORD = ''
+            DB_CONNECTION_STRING=''
         } = process.env
 
         return {
@@ -39,18 +36,11 @@ class Application {
                 key: API_KEY,
                 secret: API_SECRET,
             },
-            database: {
-                host: DB_HOST,
-                port: +DB_PORT,
-                user: DB_USER,
-                password: DB_PASSWORD,
-            },
+            database: DB_CONNECTION_STRING,
         }
     }
 
-    private conectDatabase(parameters: DatabaseParameters) {
-        const connectionString = `mongodb://${parameters.user}:${parameters.password}@${parameters.host}:${parameters.port}`
-
+    private conectDatabase(connectionString: string) {
         ConnectDb(connectionString, {}, () => console.log('Database connected!'))
     }
 

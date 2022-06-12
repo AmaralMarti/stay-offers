@@ -3,17 +3,10 @@ type ApiParameters = {
     secret: string
 }
 
-type DatabaseParameters = {
-    host: string
-    port: number
-    user: string
-    password: string
-}
-
 type ApplicationParameters = {
-    serverPort: number 
+    serverPort: number
     api: ApiParameters
-    database: DatabaseParameters
+    database: string
 }
 
 type Dictionary = {
@@ -180,12 +173,11 @@ type SearchOfferAmadeusResponse = {
     }[]
 }
 
-export { 
-    ApiParameters, 
-    DatabaseParameters, 
-    ApplicationParameters, 
-    Dictionary, 
-    RequesTokenAmadeusResponse, 
+export {
+    ApiParameters,
+    ApplicationParameters,
+    Dictionary,
+    RequesTokenAmadeusResponse,
     SearchCityAmadeusResponse,
     SearchHotelAmadeusResponse,
     SearchOfferAmadeusResponse
