@@ -1,7 +1,7 @@
 import { Schema, model, Model, Document } from 'mongoose'
 
 interface IHotel {
-    id: string
+    hotelId: string
     name: string
     cityCode: string
     latitude: number
@@ -9,7 +9,7 @@ interface IHotel {
 }
 
 const HotelSchema = new Schema({
-    id: {
+    hotelId: {
         type: String,
         required: true,
     },
@@ -28,11 +28,11 @@ const HotelSchema = new Schema({
     longitude: {
         type: Number,
         required: false,
-    },    
+    },
 })
 
 interface HotelDoc extends Document {
-    id: string
+    hotelId: string
     name: string
     cityCode: string
     latitude: number
@@ -49,4 +49,4 @@ interface HotelModelInterface extends Model<HotelDoc> {
 
 const Hotel = model<HotelDoc, HotelModelInterface>('Hotel', HotelSchema)
 
-export { IHotel, Hotel }
+export { IHotel, Hotel, HotelDoc }

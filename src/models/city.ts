@@ -1,9 +1,8 @@
 import { Schema, model, Model, Document } from 'mongoose'
-import { IHotel } from './hotel'
 
 interface ICity {
     id: string
-    code: string
+    cityCode: string
     name: string
     countryName:string
     countryCode: string
@@ -16,7 +15,7 @@ const CitySchema = new Schema({
         type: String,
         required: true,
     },
-    code: {
+    cityCode: {
         type: String,
         required: true,
     },
@@ -26,7 +25,7 @@ const CitySchema = new Schema({
     },
     countryName: {
         type: String,
-        required: false,        
+        required: false,
     },
     countryCode: {
         type: String,
@@ -44,7 +43,7 @@ const CitySchema = new Schema({
 
 interface CityDoc extends Document {
     id: string
-    code: string
+    cityCode: string
     name: string
     countryName:string
     countryCode: string
