@@ -15,26 +15,26 @@ class Application {
         Application.parameters = this.loadParameters()
 
         this.conectDatabase(Application.parameters.database)
-        
+
         this.server = NewExpress()
         this.prepareServer(this.server)
     }
 
     private loadParameters(): ApplicationParameters {
         DotEnvConfig()
-        
-        const { 
-            SERVER_PORT = 3000,
-            API_KEY = '', 
+
+        const {
+            PORT = 3000,
+            API_KEY = '',
             API_SECRET = '',
-            DB_HOST = 'localhost', 
-            DB_PORT = 27017, 
-            DB_USER = 'root', 
-            DB_PASSWORD = '' 
+            DB_HOST = 'localhost',
+            DB_PORT = 27017,
+            DB_USER = 'root',
+            DB_PASSWORD = ''
         } = process.env
-        
+
         return {
-            serverPort: +SERVER_PORT,
+            serverPort: +PORT,
             api: {
                 key: API_KEY,
                 secret: API_SECRET,
@@ -50,7 +50,7 @@ class Application {
 
     private conectDatabase(parameters: DatabaseParameters) {
         const connectionString = `mongodb://${parameters.user}:${parameters.password}@${parameters.host}:${parameters.port}`
-        
+
         ConnectDb(connectionString, {}, () => console.log('Database connected!'))
     }
 

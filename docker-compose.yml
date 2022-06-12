@@ -7,7 +7,7 @@ services:
         container_name: tui_app
         restart: "no"
         environment:
-            - SERVER_PORT=3000
+            - PORT=4000
             - DB_HOST=tui_db
             - DB_PORT=27017
             - DB_USER=root
@@ -27,8 +27,8 @@ services:
         volumes:
             - ".:/project"
         ports:
-            - 3000:3000
-            - 3001:3001
+            - 4000:4000
+            - 4001:4001
         command: bash -c "npm install ; npm run dev"
 
     database:
