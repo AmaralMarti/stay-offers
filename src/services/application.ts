@@ -5,6 +5,7 @@ import { Express } from 'express'
 import NewExpress from 'express'
 import { Router } from '../routes'
 import { ApplicationParameters } from '../types/types'
+import { Sync } from '../models/sync'
 
 
 class Application {
@@ -18,6 +19,8 @@ class Application {
 
         this.server = NewExpress()
         this.prepareServer(this.server)
+
+        this.clearSyncStatus()
     }
 
     private loadParameters(): ApplicationParameters {
@@ -47,6 +50,10 @@ class Application {
     private prepareServer(server: Express) {
         server.use(Cors())
         server.use('/', Router)
+    }
+
+    private async clearSyncStatus(): Promise<void> {
+        await Sync.deleteMany({})
     }
 
     public startServer() {

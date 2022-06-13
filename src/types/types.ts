@@ -10,6 +10,10 @@ type ApplicationParameters = {
 }
 
 type Dictionary = {
+    [key: string]: any
+}
+
+type StringDictionary = {
     [key: string]: string
 }
 
@@ -177,6 +181,7 @@ export {
     ApiParameters,
     ApplicationParameters,
     Dictionary,
+    StringDictionary,
     RequesTokenAmadeusResponse,
     SearchCityAmadeusResponse,
     SearchHotelAmadeusResponse,

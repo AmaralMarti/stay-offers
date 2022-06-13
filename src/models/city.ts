@@ -62,4 +62,5 @@ interface CityModelInterface extends Model<CityDoc> {
 
 const City = model<CityDoc, CityModelInterface>('City', CitySchema)
 
-export { ICity, City }
+export { ICity, City, CityDoc }
+

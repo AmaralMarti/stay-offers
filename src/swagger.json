@@ -34,13 +34,80 @@
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "cityCode",
+              "in": "query",
+              "description": "City Code to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Name to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "countryName",
+              "in": "query",
+              "description": "Country Name to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "countryCode",
+              "in": "query",
+              "description": "Country Code to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "latitude",
+              "in": "query",
+              "description": "Latitude to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "description": "Longitude to filter",
+              "required": false,
+              "type": "number"
+            }
+          ],
           "responses": {
             "200": {
               "description": "successful operation",
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/City"
+                  "$ref": "#/definitions/CityList"
                 }
               }
             },
@@ -93,6 +160,64 @@
               "description": "ID of city to return",
               "required": true,
               "type": "string"
+            },
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "query",
+              "description": "Hotel ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Name to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "cityCode",
+              "in": "query",
+              "description": "City Code to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "latitude",
+              "in": "query",
+              "description": "Latitude to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "description": "Longitude to filter",
+              "required": false,
+              "type": "number"
             }
           ],
           "tags": [
@@ -108,7 +233,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Hotel"
+                  "$ref": "#/definitions/HotelList"
                 }
               }
             },
@@ -181,6 +306,85 @@
               "description": "ID of hotel to return",
               "required": true,
               "type": "string"
+            },
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "offerId",
+              "in": "query",
+              "description": "Offer ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "query",
+              "description": "Hotel ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkInDate",
+              "in": "query",
+              "description": "Check in date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkOutDate",
+              "in": "query",
+              "description": "Check out date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "Description to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "adults",
+              "in": "query",
+              "description": "Adults to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "currency",
+              "in": "query",
+              "description": "Currency to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "totalPrice",
+              "in": "query",
+              "description": "Total price to filter",
+              "required": false,
+              "type": "number"
             }
           ],
           "tags": [
@@ -196,7 +400,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Offer"
+                  "$ref": "#/definitions/OfferList"
                 }
               }
             },
@@ -269,13 +473,73 @@
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "query",
+              "description": "Hotel ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "description": "Name to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "cityCode",
+              "in": "query",
+              "description": "City Code to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "latitude",
+              "in": "query",
+              "description": "Latitude to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "description": "Longitude to filter",
+              "required": false,
+              "type": "number"
+            }
+          ],
           "responses": {
             "200": {
               "description": "successful operation",
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Hotel"
+                  "$ref": "#/definitions/HotelList"
                 }
               }
             },
@@ -328,6 +592,85 @@
               "description": "ID of hotel to return",
               "required": true,
               "type": "string"
+            },
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "offerId",
+              "in": "query",
+              "description": "Offer ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "query",
+              "description": "Hotel ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkInDate",
+              "in": "query",
+              "description": "Check in date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkOutDate",
+              "in": "query",
+              "description": "Check out date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "Description to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "adults",
+              "in": "query",
+              "description": "Adults to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "currency",
+              "in": "query",
+              "description": "Currency to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "totalPrice",
+              "in": "query",
+              "description": "Total price to filter",
+              "required": false,
+              "type": "number"
             }
           ],
           "tags": [
@@ -341,7 +684,7 @@
             "200": {
               "description": "successful operation",
               "schema": {
-                "$ref": "#/definitions/Offer"
+                "$ref": "#/definitions/OfferList"
               }
             },
             "400": {
@@ -403,13 +746,94 @@
           "produces": [
             "application/json"
           ],
+          "parameters": [
+            {
+              "name": "perPage",
+              "in": "query",
+              "description": "Records per page",
+              "required": false,
+              "type": "number",
+              "default": "10"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Desired page",
+              "required": false,
+              "type": "number",
+              "default": "0"
+            },
+            {
+              "name": "id",
+              "in": "query",
+              "description": "ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "offerId",
+              "in": "query",
+              "description": "Offer ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "hotelId",
+              "in": "query",
+              "description": "Hotel ID to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkInDate",
+              "in": "query",
+              "description": "Check in date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "checkOutDate",
+              "in": "query",
+              "description": "Check out date to filter (YYYY-MM-DD)",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "Description to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "adults",
+              "in": "query",
+              "description": "Adults to filter",
+              "required": false,
+              "type": "number"
+            },
+            {
+              "name": "currency",
+              "in": "query",
+              "description": "Currency to filter",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "totalPrice",
+              "in": "query",
+              "description": "Total price to filter",
+              "required": false,
+              "type": "number"
+            }
+          ],
           "responses": {
             "200": {
               "description": "successful operation",
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Offer"
+                  "$ref": "#/definitions/OfferList"
                 }
               }
             },
@@ -459,12 +883,23 @@
             "Synchronization"
           ],
           "summary": "Fill data of the Cities, Hotels and Offers",
+          "description": "Search the Amadeus API for cities with the keywords NEW YORK, LONDON and MIAMI, get all the hotels in the cities returned and all the offers for the hotels returned. The process can take up to 3 minutes, because of the timeout the server returns an ok message and processes it in the backgroud.",
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "successful operation"
+              "description": "successful operation | Syncing all data, wait for completion | Syncing Cities, wait for completion | Syncing Hotels, wait for completion | Syncing Offers, wait for completion",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/SyncSuccess"
+                },
+                "example": {
+                  "status": "ok",
+                  "message": "Working. The process can take up to 3 minutes"
+                }
+              }
             },
             "400": {
               "description": "Request error"
@@ -478,12 +913,23 @@
             "Synchronization"
           ],
           "summary": "Fill data of the Cities",
+          "description": "Search the Amadeus API for cities with the keywords NEW YORK, LONDON and MIAMI. The process can take up to 1 minute, because of the timeout the server returns an ok message and processes it in the backgroud.",
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "successful operation"
+              "description": "successful operation | Syncing all data, wait for completion | Syncing Cities, wait for completion | Syncing Hotels, wait for completion | Syncing Offers, wait for completion",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/SyncSuccess"
+                },
+                "example": {
+                  "status": "ok",
+                  "message": "Working. The process can take up to 1 minutes"
+                }
+              }
             },
             "400": {
               "description": "Request error"
@@ -497,12 +943,23 @@
             "Synchronization"
           ],
           "summary": "Fill data of the Hotels",
+          "description": "It searches all the cities registered in the database and then gets all the hotels in those cities from the Amadeus API. The process can take up to 2 minutes, because of the timeout the server returns an ok message and processes it in the backgroud.",
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "successful operation"
+              "description": "successful operation | Syncing all data, wait for completion | Syncing Cities, wait for completion | Syncing Hotels, wait for completion | Syncing Offers, wait for completion",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/SyncSuccess"
+                },
+                "example": {
+                  "status": "ok",
+                  "message": "Working. The process can take up to 2 minutes"
+                }
+              }
             },
             "400": {
               "description": "Request error"
@@ -516,12 +973,23 @@
             "Synchronization"
           ],
           "summary": "Fill data of the Offers",
+          "description": "It searches all the hotels registered in the database and then gets all the offers in those hotels from the Amadeus API. The process can take up to 2 minutes, because of the timeout the server returns an ok message and processes it in the backgroud.",
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "successful operation"
+              "description": "successful operation",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/SyncSuccess"
+                },
+                "example": {
+                  "status": "ok",
+                  "message": "Working. The process can take up to 2 minutes"
+                }
+              }
             },
             "400": {
               "description": "Request error"
@@ -531,13 +999,44 @@
       }
     },
     "definitions": {
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "number"
+          },
+          "currentPage": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          },
+          "totalRecords": {
+            "type": "number"
+          }
+        }
+      },
+      "CityList": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/definitions/Pagination"
+          },
+          "filters": {
+            "$ref": "#/definitions/City"
+          },
+          "data": {
+            "$ref": "#/definitions/City"
+          }
+        }
+      },
       "City": {
         "type": "object",
         "properties": {
-          "_id": {
+          "id": {
             "type": "string"
           },
-          "id": {
+          "cityId": {
             "type": "string"
           },
           "cityCode": {
@@ -560,10 +1059,24 @@
           }
         }
       },
+      "HotelList": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/definitions/Pagination"
+          },
+          "filters": {
+            "$ref": "#/definitions/Hotel"
+          },
+          "data": {
+            "$ref": "#/definitions/Hotel"
+          }
+        }
+      },
       "Hotel": {
         "type": "object",
         "properties": {
-          "_id": {
+          "id": {
             "type": "string"
           },
           "hotelId": {
@@ -583,10 +1096,24 @@
           }
         }
       },
+      "OfferList": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/definitions/Pagination"
+          },
+          "filters": {
+            "$ref": "#/definitions/Offer"
+          },
+          "data": {
+            "$ref": "#/definitions/Offer"
+          }
+        }
+      },
       "Offer": {
         "type": "object",
         "properties": {
-          "_id": {
+          "id": {
             "type": "string"
           },
           "offerId": {
@@ -614,6 +1141,71 @@
           },
           "totalPrice": {
             "type": "number"
+          }
+        }
+      },
+      "SyncSuccess": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "ok"
+          },
+          "message": {
+            "type": "string",
+            "example": "Working. The process can take up to 3 minutes"
+          }
+        }
+      },
+      "SyncWaitAllData": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "working"
+          },
+          "message": {
+            "type": "string",
+            "example": "Syncing all data, wait for completion"
+          }
+        }
+      },
+      "SyncWaitCities": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "working"
+          },
+          "message": {
+            "type": "string",
+            "example": "Syncing Cities, wait for completion"
+          }
+        }
+      },
+      "SyncWaitCHotels": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "working"
+          },
+          "message": {
+            "type": "string",
+            "example": "Syncing Hotels, wait for completion"
+          }
+        }
+      },
+      "SyncWaitOffers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "working"
+          },
+          "message": {
+            "type": "string",
+            "example": "Syncing Offers, wait for completion"
           }
         }
       }

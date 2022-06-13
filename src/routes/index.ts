@@ -29,6 +29,6 @@ router.use(Express.json())
 router.use(errorHandler)
 router.get('/', defaultMessage)
 router.use('/v1', RouterV1)
-router.use('/documentation', swaggerUi.serve, swaggerUi.setup(documentation))
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(documentation))
 
 export { router as Router  }

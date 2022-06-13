@@ -3,15 +3,12 @@ import { Types } from 'mongoose'
 import { Hotel } from '../models/hotel'
 import { Offer, OfferDoc } from '../models/offer'
 import { Dictionary } from '../types/types'
-import { BaseController } from './baseController'
+import { BaseController, FilterType } from './baseController'
 
 class OfferController extends BaseController {
 
     public static async getAll(request: Request, response: Response): Promise<void> {
-        const filter = await OfferController.filterGetAll(request)
-        const offers = await Offer.find(filter)
-
-        response.status(200).json(offers)
+        return await OfferController.getPaginatedData(request, response)
     }
 
     public static async getById(request: Request, response: Response): Promise<void> {
@@ -33,18 +30,6 @@ class OfferController extends BaseController {
 
             response.status(200).json(offer)
         }
-    }
-
-    private static async filterGetAll(request: Request): Promise<Dictionary> {
-        const filters: Dictionary = {}
-
-        const hotelId = await OfferController.getHotelId(request)
-
-        if (hotelId) {
-            filters.hotelId = hotelId
-        }
-
-        return filters
     }
 
     private static async getHotelId(request: Request): Promise<string|null> {
@@ -70,6 +55,20 @@ class OfferController extends BaseController {
 
     protected static getModelLabel(): string {
         return 'Offer'
+     }
+
+    protected static getFilters(): Dictionary[] {
+        return [
+            { name: 'id', alias: '_id', type: FilterType.ObjectId },
+            { name: 'offerId', type: FilterType.String },
+            { name: 'hotelId', type: FilterType.String },
+            { name: 'checkInDate', type: FilterType.Date },
+            { name: 'checkOutDate', type: FilterType.Date },
+            { name: 'description', type: FilterType.String },
+            { name: 'adults', type: FilterType.Number },
+            { name: 'currency', type: FilterType.String },
+            { name: 'totalPrice', type: FilterType.Number },
+        ]
     }
 }
 

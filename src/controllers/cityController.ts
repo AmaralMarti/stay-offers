@@ -1,21 +1,20 @@
 import { NextFunction, Request, Response } from 'express'
-import { City } from '../models/city'
-import { BaseController } from './baseController'
+import { City, CityDoc } from '../models/city'
+import { BaseController, FilterType } from './baseController'
+import { Dictionary } from '../types/types'
 
 class CityController extends BaseController {
     public static async getAll(request: Request, response: Response): Promise<void> {
-        const cities = await City.find({})
-
-        response.status(200).json(cities)
+        await CityController.getPaginatedData(request, response)
     }
 
     public static async getById(request: Request, response: Response): Promise<void> {
         const id = request.params.cityId
 
-        const hotel = await CityController.loadEntity(id, response)
+        const city = await CityController.loadEntity(id, response) as CityDoc
 
-        if (hotel) {
-            response.status(200).json(hotel)
+        if (city) {
+            response.status(200).json(city)
         }
     }
 
@@ -35,7 +34,20 @@ class CityController extends BaseController {
 
     protected static getModelLabel(): string {
         return 'City'
+     }
+
+    protected static getFilters(): Dictionary[] {
+        return [
+            { name: 'id', alias: '_id', type: FilterType.ObjectId },
+            { name: 'cityCode', type: FilterType.String},
+            { name: 'name', type: FilterType.String},
+            { name: 'countryName', type: FilterType.String},
+            { name: 'countryCode', type: FilterType.String},
+            { name: 'latitude', type: FilterType.Number},
+            { name: 'longitude', type: FilterType.Number},
+        ]
     }
+
 }
 
 export { CityController }

@@ -1,6 +1,6 @@
 import { ICity } from '../models/city'
 import { IHotel } from '../models/hotel'
-import { ApiParameters, Dictionary, RequesTokenAmadeusResponse, SearchCityAmadeusResponse, SearchHotelAmadeusResponse, SearchOfferAmadeusResponse } from '../types/types'
+import { ApiParameters, StringDictionary, RequesTokenAmadeusResponse, SearchCityAmadeusResponse, SearchHotelAmadeusResponse, SearchOfferAmadeusResponse } from '../types/types'
 import Axios, { AxiosRequestConfig } from 'axios'
 import { URLSearchParams } from 'url'
 import { addDays, dateToString } from '../types/typeParser'
@@ -25,7 +25,7 @@ class Amadeus {
     public checkInDate = dateToString(new Date())
     public checkOutDate = dateToString(addDays(new Date(), 1))
 
-    private uriList: Dictionary = {
+    private uriList: StringDictionary = {
         accessToken: '/v1/security/oauth2/token',
         searchCity: '/v1/reference-data/locations?subType=CITY&page[offset]=%:pageOffset:%&page[limit]=%:pageLimit:%&keyword=%:keyword:%',
         hotelsByCity: '/v1/reference-data/locations/hotels/by-city?cityCode=%:cityCode:%',
@@ -36,7 +36,7 @@ class Amadeus {
         this.parameters = parameters
     }
 
-    private getUrl(uriType: UriType, queryParams?: Dictionary): string {
+    private getUrl(uriType: UriType, queryParams?: StringDictionary): string {
         let uri = this.uriList[uriType]
 
         queryParams ||= {}

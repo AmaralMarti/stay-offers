@@ -3,15 +3,12 @@ import { Types } from 'mongoose'
 import { City } from '../models/city'
 import { Hotel, HotelDoc } from '../models/hotel'
 import { Dictionary } from '../types/types'
-import { BaseController } from './baseController'
+import { BaseController, FilterType } from './baseController'
 
 class HotelController extends BaseController {
 
     public static async getAll(request: Request, response: Response): Promise<void> {
-        const filter = await HotelController.filterGetAll(request)
-        const hotels = await Hotel.find(filter)
-
-        response.status(200).json(hotels)
+        return await HotelController.getPaginatedData(request, response)
     }
 
     public static async getById(request: Request, response: Response): Promise<void> {
@@ -45,18 +42,6 @@ class HotelController extends BaseController {
         }
     }
 
-    private static async filterGetAll(request: Request): Promise<Dictionary> {
-        const filters: Dictionary = {}
-
-        const cityCode = await HotelController.getCityCode(request)
-
-        if (cityCode) {
-            filters.cityCode = cityCode
-        }
-
-        return filters
-    }
-
     private static async getCityCode(request: Request): Promise<string|null> {
         const cityId = request.params.cityId
 
@@ -80,6 +65,17 @@ class HotelController extends BaseController {
 
     protected static getModelLabel(): string {
         return 'Hotel'
+     }
+
+    protected static getFilters(): Dictionary[] {
+        return [
+            { name: 'id', alias: '_id', type: FilterType.ObjectId },
+            { name: 'hotelId', type: FilterType.String },
+            { name: 'name', type: FilterType.String },
+            { name: 'cityCode', type: FilterType.String },
+            { name: 'latitude', type: FilterType.Number },
+            { name: 'longitude', type: FilterType.Number },
+        ]
     }
 }
 
